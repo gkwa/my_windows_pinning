@@ -7,6 +7,8 @@ powershell.exe -executionpolicy bypass -noninteractive -noprofile -noninteractiv
 copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 #>
 
+$list = @()
+
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
 Remove-Item Alias:\wget -Force -EA 0
@@ -16,8 +18,8 @@ if(!(test-path wget.exe)){
 
 ./wget --quiet --timestamping --no-check-certificate https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe
 
-$d=[Environment]::GetFolderPath("MyDocuments") + '\TaskbarShortcuts'
 if($TBDIR -eq $null){
+	$d=[Environment]::GetFolderPath("MyDocuments") + '\TaskbarShortcuts'
 	Set-Variable TBDIR -option Constant -value $d
 }
 
@@ -40,230 +42,77 @@ Install-ChocolateyShortcut `
   -RunAsAdmin `
   -PinToTaskbar
 
-##############################
-
-# Powershell
-
-./PinTo10v2 /unpintb "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" | out-null
-
-Install-ChocolateyShortcut `
-  -ShortcutFilePath "${TBDIR}\Powershell.lnk" `
-  -TargetPath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" `
-  -RunAsAdmin `
-  -PinToTaskbar
-
-##############################
+# Just remove from taskbar
 
 # Windows Media Player
-# C:\Program Files\Windows Media Player\wmplayer.exe
+./PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | out-null
 
-./PinTo10v2 /unpintb "C:\Program Files\Windows Media Player\wmplayer.exe" | out-null
+# Add to taskbar
 
-##############################
+$list += @(
+	@{
+		"desc" = "Powershell";
+		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe";
+		"ShortcutFilePath" = "${TBDIR}\Powershell.lnk";
+		"WorkingDirectory" = $env:USERPROFILE
+	}
+	,@{
+		"desc" = "RubyMine";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe";
+		"ShortcutFilePath" = "${TBDIR}\RubyMine.lnk"
+	}
+	,@{
+		"desc" = "Microsoft Deployment Toolkit";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc";
+		"ShortcutFilePath" = "${TBDIR}\Microsoft Deplyment Toolkit.lnk"
+	}
+	,@{
+		"desc" = "Microsoft Visual Studio";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Visual Studio*\Common*\IDE\devenv.exe";
+		"ShortcutFilePath" = "${TBDIR}\Microsoft Visual Studio.lnk"
+	}
+	,@{
+		"desc" = "Vim";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\vim\vim8*\gvim.exe";
+		"ShortcutFilePath" = "${TBDIR}\Vim.lnk"
+	}
+	,@{
+		"desc" = "Google Chrome";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
+		"ShortcutFilePath" = "${TBDIR}\Chrome.lnk"
+	}
+	,@{
+		"desc" = "Microsoft Image Configuration Editor";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Standard*\Tools\Image Configuration Editor\ice.exe";
+		"ShortcutFilePath" = "${TBDIR}\Ice.lnk"
+	}
+	,@{
+		"desc" = "Internet Explorer";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Internet Explorer\iexplore.exe";
+		"ShortcutFilePath" = "${TBDIR}\IE.lnk"
+	}
+	,@{
+		"desc" = "Windows Embedded Developer Update";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe";
+		"ShortcutFilePath" = "${TBDIR}\WEDU.lnk"
+	}
+)
 
-# RubyMine
-# C:\Program Files\JetBrains\RubyMine 2016.2.3\bin\rubymine.exe
-
-$mypath1 = gci "${env:ProgramFiles}\JetBrains\RubyMine*\bin\rubymine.exe" -ea 0 | select -exp fullname
-./PinTo10v2 /unpintb "$mypath1" | out-null
-$mypath2 = gci "${env:ProgramFiles(x86)}\JetBrains\RubyMine*\bin\rubymine.exe" -ea 0 | select -exp fullname
-./PinTo10v2 /unpintb "$mypath2" | out-null
-
-if(($mypath1 -ne $null) -and (test-path "$mypath1"))
+foreach($h in $list)
 {
+	# expand glob to file that possibly exists
+	$file_path = gci $h.get_item("glob") -ea 0 | select -exp fullname
+
+	if($file_path -eq $null) {
+		continue
+	}
+
+	./PinTo10v2 /unpintb "$file_path" | out-null
+
 	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\RubyMine.lnk" `
-	  -TargetPath "$mypath1" `
+	  -ShortcutFilePath $h.get_item("ShortcutFilePath") `
+	  -TargetPath "$file_path" `
 	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(($mypath2 -ne $null) -and (test-path "$mypath2"))
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\RubyMine.lnk" `
-	  -TargetPath "$mypath2" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Microsoft Deployment Toolkit
-# C:\Program Files\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc" | out-null
-
-if(test-path "${env:ProgramFiles}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Microsoft Deplyment Toolkit.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Microsoft Deplyment Toolkit.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Microsoft Visual Studio
-# C:\Program Files\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Microsoft Visual Studio.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Microsoft Visual Studio.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Vim
-# "C:\Program Files\vim\vim80\gvim.exe"
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\vim\vim80\gvim.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\vim\vim80\gvim.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\vim\vim80\gvim.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Vim.lnk" `
-	  -TargetPath "${env:ProgramFiles}\vim\vim80\gvim.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\vim\vim80\gvim.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Vim.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\vim\vim80\gvim.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Google Chrome
-# C:\Program Files\Google\Chrome\Application\chrome.exe
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Chrome.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Crhome.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Microsoft Image Configuration Editor
-# 
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Chrome.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\Crhome.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Windows Embedded Standard 7\Tools\Image Configuration Editor\ice.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Windows Embedded Developer Update
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\WEDU.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\WEDU.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Windows Embedded Developer Update 1.2\Toolset\Embedded Tools\Wedu.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-##############################
-
-# Internet Explorer
-# "C:\Program Files\Internet Explorer\iexplore.exe"
-
-./PinTo10v2 /unpintb "${env:ProgramFiles(x86)}\Internet Explorer\iexplore.exe" | out-null
-./PinTo10v2 /unpintb "${env:ProgramFiles}\Internet Explorer\iexplore.exe" | out-null
-
-if(test-path "${env:ProgramFiles}\Internet Explorer\iexplore.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\IE.lnk" `
-	  -TargetPath "${env:ProgramFiles}\Internet Explorer\iexplore.exe" `
-	  -RunAsAdmin `
-	  -PinToTaskbar
-}
-
-if(test-path "${env:ProgramFiles(x86)}\Internet Explorer\iexplore.exe")
-{
-	Install-ChocolateyShortcut `
-	  -ShortcutFilePath "${TBDIR}\IE.lnk" `
-	  -TargetPath "${env:ProgramFiles(x86)}\Internet Explorer\iexplore.exe" `
-	  -RunAsAdmin `
+	  -WorkingDirectory $h.get_item("WorkingDirectory") `
 	  -PinToTaskbar
 }
