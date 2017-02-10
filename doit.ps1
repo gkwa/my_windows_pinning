@@ -27,7 +27,7 @@ if($TBDIR -eq $null){
 
 ./PinTo10v2 /unpintb "$env:SystemRoot\System32\shutdown.exe" | out-null
 
-$ridir="${TBDIR}\Reboot Immediately"
+$ridir="$TBDIR\Reboot Immediately"
 mkdir -force $ridir | out-null
 $icofile="$ridir\Windows-Restart.ico"
 $scfile="$ridir\Reboot Immediately.lnk"
@@ -53,53 +53,53 @@ $list += @(
 	@{
 		"desc" = "Powershell";
 		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe";
-		"ShortcutFilePath" = "${TBDIR}\Powershell.lnk";
+		"ShortcutFilePath" = "$TBDIR\Powershell.lnk";
 		"WorkingDirectory" = $env:USERPROFILE
 	}
 	,@{
 		"desc" = "RubyMine";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe";
-		"ShortcutFilePath" = "${TBDIR}\RubyMine.lnk"
+		"ShortcutFilePath" = "$TBDIR\RubyMine.lnk"
 	}
 	,@{
 		"desc" = "Microsoft Deployment Toolkit";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc";
-		"ShortcutFilePath" = "${TBDIR}\Microsoft Deplyment Toolkit.lnk"
+		"ShortcutFilePath" = "$TBDIR\Microsoft Deplyment Toolkit.lnk"
 	}
 	,@{
 		"desc" = "Microsoft Visual Studio";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Visual Studio*\Common*\IDE\devenv.exe";
-		"ShortcutFilePath" = "${TBDIR}\Microsoft Visual Studio.lnk"
+		"ShortcutFilePath" = "$TBDIR\Microsoft Visual Studio.lnk"
 	}
 	,@{
 		"desc" = "Vim";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\vim\vim8*\gvim.exe";
-		"ShortcutFilePath" = "${TBDIR}\Vim.lnk"
+		"ShortcutFilePath" = "$TBDIR\Vim.lnk"
 	}
 	,@{
 		"desc" = "Google Chrome";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
-		"ShortcutFilePath" = "${TBDIR}\Chrome.lnk"
+		"ShortcutFilePath" = "$TBDIR\Chrome.lnk"
 	}
 	,@{
 		"desc" = "Microsoft Image Configuration Editor";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Standard*\Tools\Image Configuration Editor\ice.exe";
-		"ShortcutFilePath" = "${TBDIR}\Ice.lnk"
+		"ShortcutFilePath" = "$TBDIR\Ice.lnk"
 	}
 	,@{
 		"desc" = "Internet Explorer";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Internet Explorer\iexplore.exe";
-		"ShortcutFilePath" = "${TBDIR}\IE.lnk"
+		"ShortcutFilePath" = "$TBDIR\IE.lnk"
 	}
 	,@{
 		"desc" = "Windows Embedded Developer Update";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe";
-		"ShortcutFilePath" = "${TBDIR}\WEDU.lnk"
+		"ShortcutFilePath" = "$TBDIR\WEDU.lnk"
 	}
 	,@{
 		"desc" = "TCP Optimizer";
 		"glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe";
-		"ShortcutFilePath" = "${TBDIR}\TCP Optimizer.lnk"
+		"ShortcutFilePath" = "$TBDIR\TCP Optimizer.lnk"
 	}
 )
 
