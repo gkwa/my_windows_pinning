@@ -96,6 +96,11 @@ $list += @(
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe";
 		"ShortcutFilePath" = "${TBDIR}\WEDU.lnk"
 	}
+	,@{
+		"desc" = "TCP Optimizer";
+		"glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe";
+		"ShortcutFilePath" = "${TBDIR}\TCP Optimizer.lnk"
+	}
 )
 
 foreach($h in $list)
