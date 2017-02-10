@@ -107,6 +107,8 @@ foreach($h in $list)
 		continue
 	}
 
+	# unpin first so we can run muliple times without creating
+	# duplicates
 	./PinTo10v2 /unpintb "$file_path" | out-null
 
 	Install-ChocolateyShortcut `
