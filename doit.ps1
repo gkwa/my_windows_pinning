@@ -42,6 +42,21 @@ Install-ChocolateyShortcut `
   -RunAsAdmin `
   -PinToTaskbar
 
+$ridir="$TBDIR\PowerOff Immediately"
+mkdir -force $ridir | out-null
+$icofile="$ridir\power_off.ico"
+$scfile="$ridir\PowerOff Immediately.lnk"
+./wget --quiet --timestamping --no-check-certificate --directory-prefix $ridir https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/power_off.ico
+Install-ChocolateyShortcut `
+  -ShortcutFilePath $scfile `
+  -TargetPath "$env:SystemRoot\System32\shutdown.exe" `
+  -Arguments '-t 15 -s -f -c "Powering off in 15 seconds"' `
+  -IconLocation $icofile `
+  -Description "PowerOff now" `
+  -WindowStyle 7 `
+  -RunAsAdmin `
+  -PinToTaskbar
+
 # Just remove from taskbar
 
 # Windows Media Player
