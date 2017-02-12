@@ -70,6 +70,7 @@ $list += @(
 		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
 		"ShortcutFilePath" = "$TBDIR\Powershell.lnk"
 		"Arguments" = '-NoExit -Command "cd $env:USERPROFILE"'
+		"WorkingDirectory" = "$env:USERPROFILE"
 	}
 	,@{
 		"desc" = "RubyMine"
@@ -188,8 +189,7 @@ foreach($h in $list)
 	  -TargetPath "$file_path" `
 	  -RunAsAdmin `
 	  -Arguments $h.get_item("Arguments") `
-	  -WorkingDirectory $h.get_item("WorkingDirectory") `
-	  -PinToTaskbar
+	  -WorkingDirectory $h.get_item("WorkingDirectory")
 
 	./PinTo10v2 /pintb "$file_path" | out-null
 
