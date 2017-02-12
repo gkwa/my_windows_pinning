@@ -150,6 +150,7 @@ $list += @(
 		"desc" = "Microsft Edge"
 		"glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe"
 		"ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
+		"WorkingDirectory" = "$env:SYSTEMROOT"
 	}
 )
 
