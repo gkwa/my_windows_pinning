@@ -39,8 +39,8 @@ Install-ChocolateyShortcut `
   -IconLocation $icofile `
   -Description "Restart machine now" `
   -WindowStyle 7 `
-  -RunAsAdmin `
-  -PinToTaskbar
+  -RunAsAdmin
+
 
 $ridir="$TBDIR\PowerOff Immediately"
 mkdir -force $ridir | out-null
@@ -56,6 +56,8 @@ Install-ChocolateyShortcut `
   -WindowStyle 7 `
   -RunAsAdmin `
   -PinToTaskbar
+
+./PinTo10v2 /pintb $scfile | out-null
 
 # Just remove from taskbar
 
