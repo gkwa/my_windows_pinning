@@ -103,7 +103,12 @@ $list += @(
 	}
 	,@{
 		"desc" = "Internet Explorer"
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Internet Explorer\iexplore.exe"
+		"glob" = "${env:SYSTEMDRIVE}\Program Files\Internet Explorer\iexplore.exe"
+		"ShortcutFilePath" = "$TBDIR\IE.lnk"
+	}
+	,@{
+		"desc" = "Internet Explorer"
+		"glob" = "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe"
 		"ShortcutFilePath" = "$TBDIR\IE.lnk"
 	}
 	,@{
