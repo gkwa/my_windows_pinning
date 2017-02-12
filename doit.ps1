@@ -191,6 +191,6 @@ foreach($h in $list)
 	  -Arguments $h.get_item("Arguments") `
 	  -WorkingDirectory $h.get_item("WorkingDirectory")
 
-	./PinTo10v2 /pintb "$file_path" | out-null
+	./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
 
 }
