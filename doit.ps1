@@ -87,6 +87,11 @@ $list += @(
 		"ShortcutFilePath" = "$TBDIR\Microsoft Visual Studio.lnk"
 	}
 	,@{
+		"desc" = "Microsoft Visual Studio Code"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft VS Code\Code.exe"
+		"ShortcutFilePath" = "$TBDIR\Microsoft Visual Studio Code.lnk"
+	}
+	,@{
 		"desc" = "Vim"
 		"glob" = "${env:SYSTEMDRIVE}\Program*\vim\vim8*\gvim.exe"
 		"ShortcutFilePath" = "$TBDIR\Vim.lnk"
