@@ -148,6 +148,7 @@ $list += @(
 	}
 )
 
+# Remove all first
 foreach($h in $list)
 {
 	# expand glob to file that possibly exists
@@ -160,6 +161,16 @@ foreach($h in $list)
 	# unpin first so we can run muliple times without creating
 	# duplicates
 	./PinTo10v2 /unpintb "$file_path" | out-null
+}
+
+foreach($h in $list)
+{
+	# expand glob to file that possibly exists
+	$file_path = gci $h.get_item("glob") -ea 0 | select -exp fullname
+
+	if($file_path -eq $null) {
+		continue
+	}
 
 	Install-ChocolateyShortcut `
 	  -ShortcutFilePath $h.get_item("ShortcutFilePath") `
@@ -167,4 +178,7 @@ foreach($h in $list)
 	  -RunAsAdmin `
 	  -WorkingDirectory $h.get_item("WorkingDirectory") `
 	  -PinToTaskbar
+
+	./PinTo10v2 /pintb "$file_path" | out-null
+
 }
