@@ -37,7 +37,8 @@ Install-ChocolateyShortcut `
   -IconLocation $icofile `
   -Description "Restart machine now" `
   -WindowStyle 7 `
-  -RunAsAdmin
+  -RunAsAdmin `
+  -PinToTaskbar
 
 ./PinTo10v2 /unpintb $scfile | out-null
 ./PinTo10v2 /pintb $scfile | out-null
@@ -54,7 +55,8 @@ Install-ChocolateyShortcut `
   -IconLocation $icofile `
   -Description "Power Off in 2 minutes" `
   -WindowStyle 7 `
-  -RunAsAdmin
+  -RunAsAdmin `
+  -PinToTaskbar
 
 ./PinTo10v2 /unpintb $scfile | out-null
 ./PinTo10v2 /pintb $scfile | out-null
@@ -196,7 +198,8 @@ foreach($h in $list)
 	  -TargetPath "$file_path" `
 	  -RunAsAdmin `
 	  -Arguments $h.get_item("Arguments") `
-	  -WorkingDirectory $h.get_item("WorkingDirectory")
+	  -WorkingDirectory $h.get_item("WorkingDirectory") `
+	  -PinToTaskbar
 
 	./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
 
