@@ -25,8 +25,6 @@ if($TBDIR -eq $null){
 
 ##############################
 
-./PinTo10v2 /unpintb "$env:SystemRoot\System32\shutdown.exe" | out-null
-
 $ridir="$TBDIR\Reboot Immediately"
 mkdir -force $ridir | out-null
 $icofile="$ridir\Windows-Restart.ico"
@@ -41,6 +39,8 @@ Install-ChocolateyShortcut `
   -WindowStyle 7 `
   -RunAsAdmin
 
+./PinTo10v2 /unpintb $scfile | out-null
+./PinTo10v2 /pintb $scfile | out-null
 
 $ridir="$TBDIR\PowerOff Immediately"
 mkdir -force $ridir | out-null
@@ -54,9 +54,9 @@ Install-ChocolateyShortcut `
   -IconLocation $icofile `
   -Description "Power Off in 2 minutes" `
   -WindowStyle 7 `
-  -RunAsAdmin `
-  -PinToTaskbar
+  -RunAsAdmin
 
+./PinTo10v2 /unpintb $scfile | out-null
 ./PinTo10v2 /pintb $scfile | out-null
 
 # Just remove from taskbar
