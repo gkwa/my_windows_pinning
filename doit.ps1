@@ -173,7 +173,7 @@ $list += @(
 foreach($h in $list)
 {
 	# expand glob to file that possibly exists
-	$file_path = gci $h.get_item("ShortcutFilePath") -ea 0 | select -exp fullname
+	$file_path = gci $h.get_item("glob") -ea 0 | select -exp fullname
 
 	if($file_path -eq $null) {
 		continue
@@ -181,7 +181,7 @@ foreach($h in $list)
 
 	# unpin first so we can run muliple times without creating
 	# duplicates
-	./PinTo10v2 /unpintb "$file_path" | out-null
+	./PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | out-null
 }
 
 foreach($h in $list)
