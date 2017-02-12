@@ -67,83 +67,83 @@ Install-ChocolateyShortcut `
 $list += @(
 	@{
 		"desc" = "Powershell";
-		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe";
-		"ShortcutFilePath" = "$TBDIR\Powershell.lnk";
+		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+		"ShortcutFilePath" = "$TBDIR\Powershell.lnk"
 		"WorkingDirectory" = $env:USERPROFILE
 	}
 	,@{
-		"desc" = "RubyMine";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe";
+		"desc" = "RubyMine"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe"
 		"ShortcutFilePath" = "$TBDIR\RubyMine.lnk"
 	}
 	,@{
-		"desc" = "Microsoft Deployment Toolkit";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc";
+		"desc" = "Microsoft Deployment Toolkit"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc"
 		"ShortcutFilePath" = "$TBDIR\Microsoft Deplyment Toolkit.lnk"
 	}
 	,@{
-		"desc" = "Microsoft Visual Studio";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Visual Studio*\Common*\IDE\devenv.exe";
+		"desc" = "Microsoft Visual Studio"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Visual Studio*\Common*\IDE\devenv.exe"
 		"ShortcutFilePath" = "$TBDIR\Microsoft Visual Studio.lnk"
 	}
 	,@{
-		"desc" = "Vim";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\vim\vim8*\gvim.exe";
+		"desc" = "Vim"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\vim\vim8*\gvim.exe"
 		"ShortcutFilePath" = "$TBDIR\Vim.lnk"
 	}
 	,@{
-		"desc" = "Microsoft Image Configuration Editor";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Standard*\Tools\Image Configuration Editor\ice.exe";
+		"desc" = "Microsoft Image Configuration Editor"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Standard*\Tools\Image Configuration Editor\ice.exe"
 		"ShortcutFilePath" = "$TBDIR\Ice.lnk"
 	}
 	,@{
-		"desc" = "Internet Explorer";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Internet Explorer\iexplore.exe";
+		"desc" = "Internet Explorer"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Internet Explorer\iexplore.exe"
 		"ShortcutFilePath" = "$TBDIR\IE.lnk"
 	}
 	,@{
-		"desc" = "Windows Embedded Developer Update";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe";
+		"desc" = "Windows Embedded Developer Update"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe"
 		"ShortcutFilePath" = "$TBDIR\WEDU.lnk"
 	}
 	,@{
-		"desc" = "TCP Optimizer";
-		"glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe";
+		"desc" = "TCP Optimizer"
+		"glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe"
 		"ShortcutFilePath" = "$TBDIR\TCP Optimizer.lnk"
 	}
 	,@{
-		"desc" = "Virtualbox";
-		"glob" = "${env:SYSTEMDRIVE}\Pro*\Oracle\VirtualBox\VirtualBox.exe";
+		"desc" = "Virtualbox"
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Oracle\VirtualBox\VirtualBox.exe"
 		"ShortcutFilePath" = "$TBDIR\VirtualBox.lnk"
 	}
 	,@{
-		"desc" = "Opera";
-		"glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe";
+		"desc" = "Opera"
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe"
 		"ShortcutFilePath" = "$TBDIR\Opera.lnk"
 	}
 	,@{
-		"desc" = "Disk Speed Test";
-		"glob" = "${env:SYSTEMDRIVE}\Pro*\Blackmagic Design\Disk Speed Test\DiskSpeedTest.exe";
+		"desc" = "Disk Speed Test"
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Blackmagic Design\Disk Speed Test\DiskSpeedTest.exe"
 		"ShortcutFilePath" = "$TBDIR\Disk Speed Test.lnk"
 	}
 	,@{
-		"desc" = "Disk Speed Test";
-		"glob" = "${env:SYSTEMROOT}\System32\SnippingTool.exe";
+		"desc" = "Disk Speed Test"
+		"glob" = "${env:SYSTEMROOT}\System32\SnippingTool.exe"
 		"ShortcutFilePath" = "$TBDIR\Snipping Tool.lnk"
 	}
 	,@{
-		"desc" = "Google Chrome";
+		"desc" = "Google Chrome"
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
 		"ShortcutFilePath" = "$TBDIR\Chrome.lnk"
 	}
 	,@{
-		"desc" = "Opera";
-		"glob" = "${env:SYSTEMDRIVE}\Pro*\Mozilla*\firefox.exe";
+		"desc" = "Opera"
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Mozilla*\firefox.exe"
 		"ShortcutFilePath" = "$TBDIR\Firefox.lnk"
 	}
 	,@{
-		"desc" = "Microsft Edge";
-		"glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe";
+		"desc" = "Microsft Edge"
+		"glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe"
 		"ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
 	}
 )
