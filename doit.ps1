@@ -158,6 +158,11 @@ $list += @(
 		"ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
 		"WorkingDirectory" = "$env:SYSTEMROOT"
 	}
+	,@{
+		"desc" = "WinDirStat"
+		"glob" = "${env:SYSTEMDRIVE}\Program*\WinDirStat\windirstat.exe"
+		"ShortcutFilePath" = "$TBDIR\WinDirStat.lnk"
+	}
 )
 
 # Remove all first
