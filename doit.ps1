@@ -92,11 +92,6 @@ $list += @(
 		"ShortcutFilePath" = "$TBDIR\Vim.lnk"
 	}
 	,@{
-		"desc" = "Google Chrome";
-		"glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
-		"ShortcutFilePath" = "$TBDIR\Chrome.lnk"
-	}
-	,@{
 		"desc" = "Microsoft Image Configuration Editor";
 		"glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Standard*\Tools\Image Configuration Editor\ice.exe";
 		"ShortcutFilePath" = "$TBDIR\Ice.lnk"
@@ -115,6 +110,41 @@ $list += @(
 		"desc" = "TCP Optimizer";
 		"glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe";
 		"ShortcutFilePath" = "$TBDIR\TCP Optimizer.lnk"
+	}
+	,@{
+		"desc" = "Virtualbox";
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Oracle\VirtualBox\VirtualBox.exe";
+		"ShortcutFilePath" = "$TBDIR\VirtualBox.lnk"
+	}
+	,@{
+		"desc" = "Opera";
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe";
+		"ShortcutFilePath" = "$TBDIR\Opera.lnk"
+	}
+	,@{
+		"desc" = "Disk Speed Test";
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Blackmagic Design\Disk Speed Test\DiskSpeedTest.exe";
+		"ShortcutFilePath" = "$TBDIR\Disk Speed Test.lnk"
+	}
+	,@{
+		"desc" = "Disk Speed Test";
+		"glob" = "${env:SYSTEMROOT}\System32\SnippingTool.exe";
+		"ShortcutFilePath" = "$TBDIR\Snipping Tool.lnk"
+	}
+	,@{
+		"desc" = "Google Chrome";
+		"glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
+		"ShortcutFilePath" = "$TBDIR\Chrome.lnk"
+	}
+	,@{
+		"desc" = "Opera";
+		"glob" = "${env:SYSTEMDRIVE}\Pro*\Mozilla*\firefox.exe";
+		"ShortcutFilePath" = "$TBDIR\Firefox.lnk"
+	}
+	,@{
+		"desc" = "Microsft Edge";
+		"glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe";
+		"ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
 	}
 )
 
