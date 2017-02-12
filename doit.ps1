@@ -50,9 +50,9 @@ $scfile="$ridir\PowerOff Immediately.lnk"
 Install-ChocolateyShortcut `
   -ShortcutFilePath $scfile `
   -TargetPath "$env:SystemRoot\System32\shutdown.exe" `
-  -Arguments '-t 15 -s -f -c "Powering off in 15 seconds"' `
+  -Arguments '-t 120 -s -f -c "Powering off in 2 minutes"' `
   -IconLocation $icofile `
-  -Description "PowerOff now" `
+  -Description "Power Off in 2 minutes" `
   -WindowStyle 7 `
   -RunAsAdmin `
   -PinToTaskbar
