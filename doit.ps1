@@ -39,6 +39,14 @@ $list += @(
         "WorkingDirectory" = "$env:USERPROFILE"
     }
     ,@{
+        "desc" = "Cmd"
+        "glob" = "$env:SystemRoot\System32\cmd.exe"
+        "ShortcutFilePath" = "$TBDIR\Cmd.lnk"
+        "Arguments" = '/k cd %USERPROFILE%'
+        "Description" = "Cmd window"
+        "WorkingDirectory" = "%USERPROFILE%"
+    }
+    ,@{
         "desc" = "Reboot Immediately"
         "glob" = "$env:SystemRoot\System32\shutdown.exe"
         "ShortcutFilePath" = "$TBDIR\Reboot Immediately\Reboot Immediately.lnk"
