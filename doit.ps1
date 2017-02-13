@@ -168,22 +168,24 @@ foreach($h in $list) {
 }
 
 foreach($h in $list) {
-    if(!(test-path $h.get_item("IconLocation"))) {
-        if($h.ContainsKey("IconSourceURL")) {
-            $p = $h.get_item("IconLocation").Parent
-            mkdir -force $p
-            ./wget --quiet --timestamping --no-check-certificate `
-			  --directory-prefix $p $h.get_item("IconSourceURL")
-		}
+    if($h.ContainsKey("IconLocation")) {
+        if(!(test-path $h.get_item("IconLocation"))) {
+            if($h.ContainsKey("IconSourceURL")) {
+                $p = $h.get_item("IconLocation").Parent
+                mkdir -force $p
+                ./wget --quiet --timestamping --no-check-certificate `
+					 --directory-prefix $p $h.get_item("IconSourceURL")
+            }
+        }
     }
-
+	
     Install-ChocolateyShortcut `
-	  -ShortcutFilePath $h.get_item("ShortcutFilePath") `
-	  -TargetPath "$file_path" `
-	  -RunAsAdmin `
-	  -Arguments $h.get_item("Arguments") `
-	  -WorkingDirectory $h.get_item("WorkingDirectory") `
-	  -PinToTaskbar
+		 -ShortcutFilePath $h.get_item("ShortcutFilePath") `
+		 -TargetPath "$file_path" `
+		 -RunAsAdmin `
+		 -Arguments $h.get_item("Arguments") `
+		 -WorkingDirectory $h.get_item("WorkingDirectory") `
+		 -PinToTaskbar
 
     ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
 }
