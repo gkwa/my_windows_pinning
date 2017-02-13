@@ -156,7 +156,7 @@ $list += @(
 # Remove all first
 foreach($h in $list) {
     # expand glob to file that possibly exists
-    $file_path = gci $h.get_item("glob") -ea 0 | select -exp fullname
+    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
 
     if($file_path -eq $null) {
         continue
@@ -169,7 +169,7 @@ foreach($h in $list) {
 
 foreach($h in $list) {
     # expand glob to file that possibly exists
-    $file_path = gci $h.get_item("glob") -ea 0 | select -exp fullname
+    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
 
     if($file_path -eq $null) {
         continue
