@@ -7,8 +7,6 @@ powershell.exe -executionpolicy bypass -noninteractive -noprofile -noninteractiv
 copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 #>
 
-$list = @()
-
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
 Remove-Item Alias:\wget -Force -EA 0
@@ -25,42 +23,6 @@ if($TBDIR -eq $null){
 
 ##############################
 
-$ridir="$TBDIR\Reboot Immediately"
-mkdir -force $ridir | out-null
-$icofile="$ridir\Windows-Restart.ico"
-$scfile="$ridir\Reboot Immediately.lnk"
-./wget --quiet --timestamping --no-check-certificate --directory-prefix $ridir https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/Windows-Restart.ico
-Install-ChocolateyShortcut `
-  -ShortcutFilePath $scfile `
-  -TargetPath "$env:SystemRoot\System32\shutdown.exe" `
-  -Arguments '-t 2 -r -f -c "Rebooting now"' `
-  -IconLocation $icofile `
-  -Description "Restart machine now" `
-  -WindowStyle 7 `
-  -RunAsAdmin `
-  -PinToTaskbar
-
-./PinTo10v2 /unpintb $scfile | out-null
-./PinTo10v2 /pintb $scfile | out-null
-
-$ridir="$TBDIR\PowerOff Immediately"
-mkdir -force $ridir | out-null
-$icofile="$ridir\power_off.ico"
-$scfile="$ridir\PowerOff Immediately.lnk"
-./wget --quiet --timestamping --no-check-certificate --directory-prefix $ridir https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/power_off.ico
-Install-ChocolateyShortcut `
-  -ShortcutFilePath $scfile `
-  -TargetPath "$env:SystemRoot\System32\shutdown.exe" `
-  -Arguments '-t 120 -s -f -c "Powering off in 2 minutes"' `
-  -IconLocation $icofile `
-  -Description "Power Off in 2 minutes" `
-  -WindowStyle 7 `
-  -RunAsAdmin `
-  -PinToTaskbar
-
-./PinTo10v2 /unpintb $scfile | out-null
-./PinTo10v2 /pintb $scfile | out-null
-
 # Just remove from taskbar
 
 # Windows Media Player
@@ -70,11 +32,33 @@ Install-ChocolateyShortcut `
 
 $list += @(
 	@{
-		"desc" = "Powershell";
+		"desc" = "Powershell"
 		"glob" = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
 		"ShortcutFilePath" = "$TBDIR\Powershell.lnk"
 		"Arguments" = '-NoExit -Command "cd $env:USERPROFILE"'
 		"WorkingDirectory" = "$env:USERPROFILE"
+	}
+	,@{
+		"desc" = "Reboot Immediately"
+		"glob" = "$env:SystemRoot\System32\shutdown.exe"
+		"ShortcutFilePath" = "$TBDIR\Reboot Immediately\Reboot Immediately.lnk"
+		"Arguments" = '-t 2 -r -f -c "Rebooting now"'
+		"WorkingDirectory" = "$env:USERPROFILE"
+  		"WindowStyle" = 7
+		"Description" = "Restart machine now"
+  		"IconLocation" = "$TBDIR\Reboot Immediately\Windows-Restart.ico"
+		"IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/Windows-Restart.ico"
+	}
+	,@{
+		"desc" = "Power off immediately"
+		"glob" = "$env:SystemRoot\System32\shutdown.exe"
+		"ShortcutFilePath" = "$TBDIR\PowerOff Immediately\PowerOff.lnk"
+		"Arguments" = '-t 60 -s -f -c "Shutting down in 1 minute"'
+		"WorkingDirectory" = "$env:USERPROFILE"
+  		"WindowStyle" = 7
+		"Description" = "Power off machine in 1 minute"
+  		"IconLocation" = "$TBDIR\PowerOff Immediately\power_off.ico"
+		"IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/power_off.ico"
 	}
 	,@{
 		"desc" = "RubyMine"
@@ -191,6 +175,23 @@ foreach($h in $list)
 
 	if($file_path -eq $null) {
 		continue
+	}
+
+	$p = $h.get_item("ShortcutFilePath")
+	if(!(test-path $p))
+	{	
+		mkdir -force $p.parent
+	}
+
+	if(!(test-path $h.get_item("IconLocation")))
+	{
+		if($h.ContainsKey("IconSourceURL"))
+		{
+			$p = $h.get_item("IconLocation").Parent
+			mkdir -force $p
+			./wget --quiet --timestamping --no-check-certificate `
+			  --directory-prefix $p $h.get_item("IconSourceURL"))
+		}
 	}
 
 	Install-ChocolateyShortcut `
