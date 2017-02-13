@@ -128,12 +128,6 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\Opera.lnk"
     }
     ,@{
-        "desc" = "Microsft Edge"
-        "glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe"
-        "ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
-        "WorkingDirectory" = "$env:SYSTEMROOT"
-    }
-    ,@{
         "desc" = "Internet Explorer"
         "glob" = "${env:SYSTEMDRIVE}\Program Files\Internet Explorer\iexplore.exe"
         "ShortcutFilePath" = "$TBDIR\IE.lnk"
