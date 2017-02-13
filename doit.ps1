@@ -65,6 +65,11 @@ $list += @(
         "IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/Windows-Restart.ico"
     }
     ,@{
+        "desc" = "Wireshark"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Wireshark\Wireshark.exe"
+        "ShortcutFilePath" = "$TBDIR\Wireshark.lnk"
+    }
+    ,@{
         "desc" = "RubyMine"
         "glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe"
         "ShortcutFilePath" = "$TBDIR\RubyMine.lnk"
