@@ -26,7 +26,7 @@ if($TBDIR -eq $null){
 # Just remove from taskbar
 
 # Windows Media Player
-./PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | out-null
+./PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | Out-Null
 
 # Add to taskbar
 
@@ -174,7 +174,7 @@ foreach($h in $list) {
 
     # unpin first so we can run muliple times without creating
     # duplicates
-    ./PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | out-null
+    ./PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | Out-Null
 }
 
 foreach($h in $list) {
@@ -188,7 +188,7 @@ foreach($h in $list) {
         if(!(test-path $h.get_item("IconLocation"))) {
             if($h.ContainsKey("IconSourceURL")) {
                 $p = $h.get_item("IconLocation").Parent
-                mkdir -force $p
+                mkdir -force $p | Out-Null
                 ./wget --quiet --timestamping --no-check-certificate `
                   --directory-prefix $p $h.get_item("IconSourceURL")
             }
@@ -209,5 +209,5 @@ foreach($h in $list) {
       -WorkingDirectory $h.get_item("WorkingDirectory") `
       -PinToTaskbar
 
-    ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
+    ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | Out-Null
 }
