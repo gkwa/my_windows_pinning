@@ -168,6 +168,12 @@ foreach($h in $list) {
 }
 
 foreach($h in $list) {
+
+    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
+    if(!$file_path){
+        continue
+    }
+
     if($h.ContainsKey("IconLocation")) {
         if(!(test-path $h.get_item("IconLocation"))) {
             if($h.ContainsKey("IconSourceURL")) {
@@ -178,12 +184,18 @@ foreach($h in $list) {
             }
         }
     }
-	
+
+    $icofile = $file_path
+    if($h.get_item("IconLocation")) {
+        $icofile = $h.get_item("IconLocation") 
+    }
+
     Install-ChocolateyShortcut `
 		 -ShortcutFilePath $h.get_item("ShortcutFilePath") `
 		 -TargetPath "$file_path" `
 		 -RunAsAdmin `
-		 -Arguments $h.get_item("Arguments") `
+	     -IconLocation $icofile `
+         -Arguments $h.get_item("Arguments") `
 		 -WorkingDirectory $h.get_item("WorkingDirectory") `
 		 -PinToTaskbar
 
