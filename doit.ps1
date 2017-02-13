@@ -132,9 +132,7 @@ $list += @(
         "glob" = @{
             $false = "${env:SYSTEMDRIVE}\Program Files\Internet Explorer\iexplore.exe"
             $true = "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe"
-        }[
-            (test-path "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe")
-		 ]
+        }[(test-path "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe")]
         "ShortcutFilePath" = "$TBDIR\IE.lnk"
     }
     ,@{
@@ -182,7 +180,7 @@ foreach($h in $list) {
                 $p = $h.get_item("IconLocation").Parent
                 mkdir -force $p
                 ./wget --quiet --timestamping --no-check-certificate `
-					 --directory-prefix $p $h.get_item("IconSourceURL")
+                  --directory-prefix $p $h.get_item("IconSourceURL")
             }
         }
     }
@@ -193,13 +191,13 @@ foreach($h in $list) {
     }
 
     Install-ChocolateyShortcut `
-		 -ShortcutFilePath $h.get_item("ShortcutFilePath") `
-		 -TargetPath "$file_path" `
-		 -RunAsAdmin `
-	     -IconLocation $icofile `
-         -Arguments $h.get_item("Arguments") `
-		 -WorkingDirectory $h.get_item("WorkingDirectory") `
-		 -PinToTaskbar
+      -ShortcutFilePath $h.get_item("ShortcutFilePath") `
+      -TargetPath "$file_path" `
+      -RunAsAdmin `
+      -IconLocation $icofile `
+      -Arguments $h.get_item("Arguments") `
+      -WorkingDirectory $h.get_item("WorkingDirectory") `
+      -PinToTaskbar
 
     ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
 }
