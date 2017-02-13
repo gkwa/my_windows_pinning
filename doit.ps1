@@ -188,7 +188,6 @@ foreach($h in $list) {
 			  --directory-prefix $p $h.get_item("IconSourceURL")
     }
 
-
     Install-ChocolateyShortcut `
 	  -ShortcutFilePath $h.get_item("ShortcutFilePath") `
 	  -TargetPath "$file_path" `
@@ -198,5 +197,4 @@ foreach($h in $list) {
 	  -PinToTaskbar
 
     ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | out-null
-
 }
