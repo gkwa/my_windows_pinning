@@ -194,7 +194,7 @@ foreach($h in $list) {
     if($h.ContainsKey("IconLocation")) {
         if(!(test-path $h.get_item("IconLocation"))) {
             if($h.ContainsKey("IconSourceURL")) {
-                $p = $h.get_item("IconLocation").Parent
+                $p = Split-Path -Parent $h.get_item("IconLocation")
                 mkdir -force $p | Out-Null
                 ./wget --quiet --timestamping --no-check-certificate `
                   --directory-prefix $p $h.get_item("IconSourceURL")
