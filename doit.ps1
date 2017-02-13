@@ -93,6 +93,16 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\WEDU.lnk"
     }
     ,@{
+        "desc" = "Putty"
+        "glob" = "${env:SYSTEMDRIVE}\chocolatey\bin\PUTTY.EXE"
+        "ShortcutFilePath" = "$TBDIR\Putty.lnk"
+    }
+    ,@{
+        "desc" = "MySQL Workbench"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\MySQL\MySQL Workbench*\MySQLWorkbench.exe"
+        "ShortcutFilePath" = "$TBDIR\MySQL Workbench.lnk"
+    }
+    ,@{
         "desc" = "TCP Optimizer"
         "glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe"
         "ShortcutFilePath" = "$TBDIR\TCP Optimizer.lnk"
