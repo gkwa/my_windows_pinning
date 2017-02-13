@@ -88,16 +88,6 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\Ice.lnk"
     }
     ,@{
-        "desc" = "Internet Explorer"
-        "glob" = "${env:SYSTEMDRIVE}\Program Files\Internet Explorer\iexplore.exe"
-        "ShortcutFilePath" = "$TBDIR\IE.lnk"
-    }
-    ,@{
-        "desc" = "Internet Explorer"
-        "glob" = "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe"
-        "ShortcutFilePath" = "$TBDIR\IE.lnk"
-    }
-    ,@{
         "desc" = "Windows Embedded Developer Update"
         "glob" = "${env:SYSTEMDRIVE}\Program*\Windows Embedded Developer Update*\Toolset\Embedded Tools\Wedu.exe"
         "ShortcutFilePath" = "$TBDIR\WEDU.lnk"
@@ -111,11 +101,6 @@ $list += @(
         "desc" = "Virtualbox"
         "glob" = "${env:SYSTEMDRIVE}\Pro*\Oracle\VirtualBox\VirtualBox.exe"
         "ShortcutFilePath" = "$TBDIR\VirtualBox.lnk"
-    }
-    ,@{
-        "desc" = "Opera"
-        "glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe"
-        "ShortcutFilePath" = "$TBDIR\Opera.lnk"
     }
     ,@{
         "desc" = "Disk Speed Test"
@@ -138,10 +123,25 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\Firefox.lnk"
     }
     ,@{
+        "desc" = "Opera"
+        "glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe"
+        "ShortcutFilePath" = "$TBDIR\Opera.lnk"
+    }
+    ,@{
         "desc" = "Microsft Edge"
         "glob" = "${env:SYSTEMROOT}\SystemApps\Microsoft.MicrosoftEdge*\MicrosoftEdge.exe"
         "ShortcutFilePath" = "$TBDIR\Microsft Edge.lnk"
         "WorkingDirectory" = "$env:SYSTEMROOT"
+    }
+    ,@{
+        "desc" = "Internet Explorer"
+        "glob" = "${env:SYSTEMDRIVE}\Program Files\Internet Explorer\iexplore.exe"
+        "ShortcutFilePath" = "$TBDIR\IE.lnk"
+    }
+    ,@{
+        "desc" = "Internet Explorer"
+        "glob" = "${env:SYSTEMDRIVE}\Program Files (x86)\Internet Explorer\iexplore.exe"
+        "ShortcutFilePath" = "$TBDIR\IE.lnk"
     }
     ,@{
         "desc" = "WinDirStat"
