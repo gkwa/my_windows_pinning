@@ -50,17 +50,6 @@ $list += @(
         "IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/Windows-Restart.ico"
     }
     ,@{
-        "desc" = "Power off immediately"
-        "glob" = "$env:SystemRoot\System32\shutdown.exe"
-        "ShortcutFilePath" = "$TBDIR\PowerOff Immediately\PowerOff.lnk"
-        "Arguments" = '-t 60 -s -f -c "Shutting down in 1 minute"'
-        "WorkingDirectory" = "$env:USERPROFILE"
-        "WindowStyle" = 7
-        "Description" = "Power off machine in 1 minute"
-        "IconLocation" = "$TBDIR\PowerOff Immediately\power_off.ico"
-        "IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/power_off.ico"
-    }
-    ,@{
         "desc" = "RubyMine"
         "glob" = "${env:SYSTEMDRIVE}\Program*\JetBrains\RubyMine*\bin\rubymine.exe"
         "ShortcutFilePath" = "$TBDIR\RubyMine.lnk"
@@ -150,6 +139,17 @@ $list += @(
         "desc" = "WinDirStat"
         "glob" = "${env:SYSTEMDRIVE}\Program*\WinDirStat\windirstat.exe"
         "ShortcutFilePath" = "$TBDIR\WinDirStat.lnk"
+    }
+    ,@{
+        "desc" = "Power off immediately"
+        "glob" = "$env:SystemRoot\System32\shutdown.exe"
+        "ShortcutFilePath" = "$TBDIR\PowerOff Immediately\PowerOff.lnk"
+        "Arguments" = '-t 60 -s -f -c "Shutting down in 1 minute"'
+        "WorkingDirectory" = "$env:USERPROFILE"
+        "WindowStyle" = 7
+        "Description" = "Power off machine in 1 minute"
+        "IconLocation" = "$TBDIR\PowerOff Immediately\power_off.ico"
+        "IconSourceURL" = "https://github.com/TaylorMonacelli/my_windows_pinning/raw/master/power_off.ico"
     }
 )
 
