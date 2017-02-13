@@ -168,24 +168,13 @@ foreach($h in $list) {
 }
 
 foreach($h in $list) {
-    # expand glob to file that possibly exists
-    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
-
-    if($file_path -eq $null) {
-        continue
-    }
-
-    $p = $h.get_item("ShortcutFilePath")
-    if(!(test-path $p)) {	
-        mkdir -force $p.parent
-    }
-
     if(!(test-path $h.get_item("IconLocation"))) {
         if($h.ContainsKey("IconSourceURL")) {
             $p = $h.get_item("IconLocation").Parent
             mkdir -force $p
             ./wget --quiet --timestamping --no-check-certificate `
 			  --directory-prefix $p $h.get_item("IconSourceURL")
+		}
     }
 
     Install-ChocolateyShortcut `
