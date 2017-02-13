@@ -21,6 +21,13 @@ if($TBDIR -eq $null){
     Set-Variable TBDIR -option Constant -value $d
 }
 
+# Check if PinTo10v2 runs on this machine
+$output = ./PinTo10v2 /pintb C:\Windows\system32\cmd.exe
+if($output -like 'I only work on windows 7 & 10 - Exiting...')
+{
+	Write-Warning "$output"
+}
+
 ##############################
 
 # Just remove from taskbar
