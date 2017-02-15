@@ -12,7 +12,6 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
-Remove-Item Alias:\wget -Force -EA 0
 if(!(test-path wget.exe)){
     (new-object System.Net.WebClient).DownloadFile('http://installer-bin.streambox.com/wget.exe', 'wget.exe')
 }
