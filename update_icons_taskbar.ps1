@@ -3,7 +3,7 @@ usage:
 Set-ExecutionPolicy Unrestricted
 # insall chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-powershell.exe -executionpolicy bypass -noninteractive -noprofile -noninteractive -command "(new-object system.net.webclient).downloadstring('https://raw.githubusercontent.com/TaylorMonacelli/my_windows_pinning/master/doit.ps1') | iex"
+powershell.exe -executionpolicy bypass -noninteractive -noprofile -noninteractive -command "(new-object system.net.webclient).downloadstring('https://raw.githubusercontent.com/TaylorMonacelli/my_windows_pinning/master/update_icons_taskbar.ps1') | iex"
 #>
 
 <#
