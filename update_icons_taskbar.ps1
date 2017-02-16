@@ -108,6 +108,11 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\WEDU.lnk"
     }
     ,@{
+        "desc" = "Docker"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Docker\Docker\Docker for Windows.exe"
+        "ShortcutFilePath" = "$TBDIR\Docker.lnk"
+    }
+    ,@{
         "desc" = "Putty"
         "glob" = "${env:SYSTEMDRIVE}\chocolatey\bin\PUTTY.EXE"
         "ShortcutFilePath" = "$TBDIR\Putty.lnk"
