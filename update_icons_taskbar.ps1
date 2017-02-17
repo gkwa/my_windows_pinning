@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.3
+.VERSION 1.2
 
 .GUID 7891e8ce-78f1-4b38-adcb-e6a43cc6d3b9
 
@@ -58,29 +58,12 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
-# Global
-$pinto10v2_doesnt_crash_here = $true
-
-
-function pinto10{
-	if($pinto10v2_doesnt_crash_here){
-		PinTo10v2 $args
-	}
-}
-
-$trash = & "$($env:ChocolateyInstall)\bin\PinTo10v2.exe" | out-null
-if(!$?){
-	$pinto10v2_doesnt_crash_here = $false
-}
-
 if(!(Test-Path PinTo10v2.exe) -and !(Get-Command PinTo10v2 -ea 0)) { 
     (new-object System.Net.WebClient).DownloadFile(
 		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
 		"$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 	)
-
 	Install-BinFile PinTo10v2 "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
-
 }
 
 if($TBDIR -eq $null){
@@ -89,7 +72,7 @@ if($TBDIR -eq $null){
 }
 
 # Check if PinTo10v2 runs on this machine
-$output = pinto10 /pintb C:\Windows\system32\cmd.exe
+$output = PinTo10v2 /pintb C:\Windows\system32\cmd.exe
 if($output -like 'I only work on windows 7 & 10 - Exiting...')
 {
 	Write-Warning "$output"
@@ -100,7 +83,7 @@ if($output -like 'I only work on windows 7 & 10 - Exiting...')
 # Just remove from taskbar
 
 # Windows Media Player
-pinto10 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | Out-Null
+PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | Out-Null
 
 # Add to taskbar
 
@@ -258,7 +241,7 @@ foreach($h in $list) {
 
     # unpin first so we can run muliple times without creating
     # duplicates
-    pinto10 /unpintb $h.get_item("ShortcutFilePath") | Out-Null
+    PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | Out-Null
 }
 
 foreach($h in $list) {
@@ -293,5 +276,5 @@ foreach($h in $list) {
       -WorkingDirectory $h.get_item("WorkingDirectory") `
       -PinToTaskbar
 
-    pinto10 /pintb $h.get_item("ShortcutFilePath") | Out-Null
+    PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | Out-Null
 }
