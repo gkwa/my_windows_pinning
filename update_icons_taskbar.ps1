@@ -60,7 +60,7 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
 if(!(Get-Command PinTo10v2 -ea 0)) { 
     if(!(test-path "${env:ProgramFiles}\PinTo10v2\bin")){
-        mkdir -force "${env:ProgramFiles}\PinTo10v2\bin"
+        mkdir -force "${env:ProgramFiles}\PinTo10v2\bin" >$null
 	}
     (new-object System.Net.WebClient).DownloadFile(
 		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
