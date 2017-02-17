@@ -1,3 +1,49 @@
+
+<#PSScriptInfo
+
+.VERSION 1.2
+
+.GUID 7891e8ce-78f1-4b38-adcb-e6a43cc6d3b9
+
+.AUTHOR Taylor Monacelli
+
+.COMPANYNAME 
+
+.COPYRIGHT 
+
+.TAGS 
+
+.LICENSEURI 
+
+.PROJECTURI 
+
+.ICONURI 
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS 
+
+.EXTERNALSCRIPTDEPENDENCIES 
+
+.RELEASENOTES
+
+
+#> 
+
+
+
+
+
+<# 
+
+.DESCRIPTION 
+Update Taskbar for apps I have installed
+
+#> 
+
+Param()
+
+
 <#
 usage: 
 Set-ExecutionPolicy Unrestricted
