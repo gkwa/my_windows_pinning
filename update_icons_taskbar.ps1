@@ -58,7 +58,7 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
-if(!(Test-Path PinTo10v2.exe) -and !(Get-Command PinTo10v2 -ea 0)) { 
+if(!(Get-Command PinTo10v2 -ea 0)) { 
     if(!(test-path "${env:ProgramFiles}\PinTo10v2\bin")){
         mkdir -force "${env:ProgramFiles}\PinTo10v2\bin"
 	}
