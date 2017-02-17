@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.3
+.VERSION 1.4
 
 .GUID 7891e8ce-78f1-4b38-adcb-e6a43cc6d3b9
 
@@ -68,7 +68,7 @@ function pinto10{
 	}
 }
 
-$trash = & "$($env:ChocolateyInstall)\bin\PinTo10v2.exe" | out-null
+$trash = & "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 if(!$?){
 	$pinto10v2_doesnt_crash_here = $false
 }
