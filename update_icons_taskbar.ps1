@@ -59,11 +59,15 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
 if(!(Test-Path PinTo10v2.exe) -and !(Get-Command PinTo10v2 -ea 0)) { 
+    if(!(test-path "${env:ProgramFiles}\PinTo10v2\bin")){
+        mkdir -force "${env:ProgramFiles}\PinTo10v2\bin"
+	}
     (new-object System.Net.WebClient).DownloadFile(
 		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
-		"$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
+		"${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
 	)
-	Install-BinFile PinTo10v2 "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
+	Uninstall-BinFile PinTo10v2
+	Install-BinFile PinTo10v2 "${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
 }
 
 if($TBDIR -eq $null){
