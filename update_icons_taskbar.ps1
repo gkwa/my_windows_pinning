@@ -63,9 +63,8 @@ if(!(Test-Path PinTo10v2.exe) -and !(Get-Command PinTo10v2 -ea 0)) {
 		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
 		"$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 	)
+	Install-BinFile PinTo10v2 "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 }
-
-Install-BinFile PinTo10v2 "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 
 if($TBDIR -eq $null){
     $d=[Environment]::GetFolderPath("MyDocuments") + '\TaskbarShortcuts'
