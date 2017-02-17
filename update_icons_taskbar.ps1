@@ -12,12 +12,14 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
-Remove-Item Alias:\wget -Force -EA 0
-if(!(test-path wget.exe)){
-    (new-object System.Net.WebClient).DownloadFile('http://installer-bin.streambox.com/wget.exe', 'wget.exe')
+if(!(Test-Path PinTo10v2.exe) -and !(Get-Command PinTo10v2 -ea 0)) { 
+    (new-object System.Net.WebClient).DownloadFile(
+		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
+		"$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
+	)
 }
 
-./wget --quiet --timestamping --no-check-certificate https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe
+Install-BinFile PinTo10v2 "$($env:ChocolateyInstall)\bin\PinTo10v2.exe"
 
 if($TBDIR -eq $null){
     $d=[Environment]::GetFolderPath("MyDocuments") + '\TaskbarShortcuts'
@@ -25,7 +27,7 @@ if($TBDIR -eq $null){
 }
 
 # Check if PinTo10v2 runs on this machine
-$output = ./PinTo10v2 /pintb C:\Windows\system32\cmd.exe
+$output = PinTo10v2 /pintb C:\Windows\system32\cmd.exe
 if($output -like 'I only work on windows 7 & 10 - Exiting...')
 {
 	Write-Warning "$output"
@@ -36,7 +38,7 @@ if($output -like 'I only work on windows 7 & 10 - Exiting...')
 # Just remove from taskbar
 
 # Windows Media Player
-./PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | Out-Null
+PinTo10v2 /unpintb "${env:SYSTEMDRIVE}\Program*\Windows Media Player\wmplayer.exe" | Out-Null
 
 # Add to taskbar
 
@@ -194,7 +196,7 @@ foreach($h in $list) {
 
     # unpin first so we can run muliple times without creating
     # duplicates
-    ./PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | Out-Null
+    PinTo10v2 /unpintb $h.get_item("ShortcutFilePath") | Out-Null
 }
 
 foreach($h in $list) {
@@ -209,8 +211,8 @@ foreach($h in $list) {
             if($h.ContainsKey("IconSourceURL")) {
                 $p = Split-Path -Parent $h.get_item("IconLocation")
                 mkdir -force $p | Out-Null
-                ./wget --quiet --timestamping --no-check-certificate `
-                  --directory-prefix $p $h.get_item("IconSourceURL")
+				(new-object System.Net.WebClient).DownloadFile(
+					$h.get_item("IconSourceURL"), $h.get_item("IconLocation"))
             }
         }
     }
@@ -229,5 +231,5 @@ foreach($h in $list) {
       -WorkingDirectory $h.get_item("WorkingDirectory") `
       -PinToTaskbar
 
-    ./PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | Out-Null
+    PinTo10v2 /pintb $h.get_item("ShortcutFilePath") | Out-Null
 }
