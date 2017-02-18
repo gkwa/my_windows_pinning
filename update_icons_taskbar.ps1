@@ -189,12 +189,12 @@ $list += @(
     }
     ,@{
         "desc" = "Virtualbox"
-        "glob" = "${env:SYSTEMDRIVE}\Pro*\Oracle\VirtualBox\VirtualBox.exe"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Oracle\VirtualBox\VirtualBox.exe"
         "ShortcutFilePath" = "$TBDIR\VirtualBox.lnk"
     }
     ,@{
         "desc" = "Disk Speed Test"
-        "glob" = "${env:SYSTEMDRIVE}\Pro*\Blackmagic Design\Disk Speed Test\DiskSpeedTest.exe"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Blackmagic Design\Disk Speed Test\DiskSpeedTest.exe"
         "ShortcutFilePath" = "$TBDIR\Disk Speed Test.lnk"
     }
     ,@{
@@ -209,12 +209,12 @@ $list += @(
     }
     ,@{
         "desc" = "Opera"
-        "glob" = "${env:SYSTEMDRIVE}\Pro*\Mozilla*\firefox.exe"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Mozilla*\firefox.exe"
         "ShortcutFilePath" = "$TBDIR\Firefox.lnk"
     }
     ,@{
         "desc" = "Opera"
-        "glob" = "${env:SYSTEMDRIVE}\Pro*\Opera\launcher.exe"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Opera\launcher.exe"
         "ShortcutFilePath" = "$TBDIR\Opera.lnk"
     }
     ,@{
