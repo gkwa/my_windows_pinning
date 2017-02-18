@@ -59,22 +59,22 @@ copy //tsclient/tmp/doit.ps1 .; . .\doit.ps1
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force
 
 function pinto10{
-	if($pinto10_ok){
-		PinTo10v2 $args
-	}
+    if($pinto10_ok){
+        PinTo10v2 $args
+    }
 }
 
 
 if(!(Get-Command PinTo10v2 -ea 0)) { 
     if(!(test-path "${env:ProgramFiles}\PinTo10v2\bin")){
         mkdir -force "${env:ProgramFiles}\PinTo10v2\bin" >$null
-	}
+    }
     (new-object System.Net.WebClient).DownloadFile(
-		'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
-		"${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
-	)
-	Uninstall-BinFile PinTo10v2
-	Install-BinFile PinTo10v2 "${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
+        'https://github.com/TaylorMonacelli/PinTo10/raw/master/Binary/PinTo10v2.exe',
+        "${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
+    )
+    Uninstall-BinFile PinTo10v2
+    Install-BinFile PinTo10v2 "${env:ProgramFiles}\PinTo10v2\bin\PinTo10v2.exe"
 }
 
 if($TBDIR -eq $null){
@@ -85,10 +85,9 @@ if($TBDIR -eq $null){
 # Check if PinTo10v2 runs on this machine
 $pinto10_ok = $true
 $output = PinTo10v2 /pintb C:\Windows\system32\cmd.exe
-if($output -like 'I only work on windows 7 & 10 - Exiting...')
-{
-	$pinto10_ok = $false
-	Write-Warning "$output"
+if($output -like 'I only work on windows 7 & 10 - Exiting...') {
+    $pinto10_ok = $false
+    Write-Warning "$output"
 }
 
 ##############################
@@ -269,8 +268,8 @@ foreach($h in $list) {
             if($h.ContainsKey("IconSourceURL")) {
                 $p = Split-Path -Parent $h.get_item("IconLocation")
                 mkdir -force $p | Out-Null
-				(new-object System.Net.WebClient).DownloadFile(
-					$h.get_item("IconSourceURL"), $h.get_item("IconLocation"))
+                (new-object System.Net.WebClient).DownloadFile(
+                    $h.get_item("IconSourceURL"), $h.get_item("IconLocation"))
             }
         }
     }
