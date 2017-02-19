@@ -207,7 +207,7 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\Chrome.lnk"
     }
     ,@{
-        "desc" = "Opera"
+        "desc" = "Firefox"
         "glob" = "${env:SYSTEMDRIVE}\Program*\Mozilla*\firefox.exe"
         "ShortcutFilePath" = "$TBDIR\Firefox.lnk"
     }
