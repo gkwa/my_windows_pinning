@@ -202,6 +202,11 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\Snipping Tool.lnk"
     }
     ,@{
+        "desc" = "VLC"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\VideoLAN\VLC\vlc.exe"
+        "ShortcutFilePath" = "$TBDIR\VLC.lnk"
+    }
+    ,@{
         "desc" = "Google Chrome"
         "glob" = "${env:SYSTEMDRIVE}\Program*\Google\Chrome\Application\chrome.exe"
         "ShortcutFilePath" = "$TBDIR\Chrome.lnk"
