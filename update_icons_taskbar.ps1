@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.6
+.VERSION 1.8
 
 .GUID 7891e8ce-78f1-4b38-adcb-e6a43cc6d3b9
 
@@ -130,6 +130,11 @@ $list += @(
         "desc" = "Wireshark"
         "glob" = "${env:SYSTEMDRIVE}\Program*\Wireshark\Wireshark.exe"
         "ShortcutFilePath" = "$TBDIR\Wireshark.lnk"
+    }
+    ,@{
+        "desc" = "Cyberduck"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Cyberduck\Cyberduck.exe"
+        "ShortcutFilePath" = "$TBDIR\Cyberduck.lnk"
     }
     ,@{
         "desc" = "RubyMine"
