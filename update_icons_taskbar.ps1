@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.8
+.VERSION 1.9
 
 .GUID 7891e8ce-78f1-4b38-adcb-e6a43cc6d3b9
 
@@ -255,7 +255,7 @@ $list += @(
 # Remove all first
 foreach($h in $list) {
     # expand glob to file that possibly exists
-    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
+    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -Last 1 | Select-Object -exp fullname
 
     if($file_path -eq $null) {
         continue
@@ -268,7 +268,7 @@ foreach($h in $list) {
 
 foreach($h in $list) {
 
-    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -exp fullname
+    $file_path = Get-ChildItem $h.get_item("glob") -ea 0 | Select-Object -Last 1 | Select-Object -exp fullname
     if(!$file_path){
         continue
     }
