@@ -187,6 +187,11 @@ $list += @(
         "ShortcutFilePath" = "$TBDIR\MySQL Workbench.lnk"
     }
     ,@{
+        "desc" = "MS Deployment Toolkit"
+        "glob" = "${env:SYSTEMDRIVE}\Program*\Microsoft Deployment Toolkit\Bin\DeploymentWorkbench.msc"
+        "ShortcutFilePath" = "$TBDIR\MS Deployment Toolkit.lnk"
+    }
+    ,@{
         "desc" = "TCP Optimizer"
         "glob" = "${env:SYSTEMDRIVE}\ProgramData\chocolatey\bin\TCPOptimizer.exe"
         "ShortcutFilePath" = "$TBDIR\TCP Optimizer.lnk"
